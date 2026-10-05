@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Сотрудники — PulseHub</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body><div class="layout"><aside th:replace="~{fragments :: sidebar}"></aside><main class="content">
+<header><div><p class="eyebrow">Управление доступом</p><h1>Сотрудники</h1></div><a sec:authorize="hasAuthority('USERS_MANAGE')" class="button primary" th:href="@{/users/new}">+ Добавить</a></header>
+<div th:if="${message}" class="alert success" th:text="${message}"></div><div th:if="${error}" class="alert error" th:text="${error}"></div>
+<section class="panel table-wrap"><table><thead><tr><th>Сотрудник</th><th>Логин</th><th>Роль</th><th>Статус</th><th></th></tr></thead><tbody>
+<tr th:each="user : ${users}"><td><strong th:text="${user.fullName}"></strong></td><td th:text="${user.username}"></td><td><span class="badge" th:text="${user.role.name}"></span></td><td><span th:class="${user.enabled ? 'badge green' : 'badge gray'}" th:text="${user.enabled ? 'Активен' : 'Отключён'}"></span></td><td class="actions" sec:authorize="hasAuthority('USERS_MANAGE')"><a th:href="@{/users/{id}/edit(id=${user.id})}">Изменить</a><form th:action="@{/users/{id}/delete(id=${user.id})}" method="post" onsubmit="return confirm('Удалить пользователя?')"><button class="danger-link">Удалить</button></form></td></tr>
+</tbody></table></section></main></div></body></html>

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Обзор — PulseHub</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body><div class="layout"><aside th:replace="~{fragments :: sidebar}"></aside>
+<main class="content"><header><div><p class="eyebrow">PulseHub / Главная</p><h1>Ваша команда</h1></div><span class="status">● Система работает</span></header>
+<section class="cards">
+    <article class="card"><span>Сотрудники</span><strong th:text="${userCount}">0</strong><a sec:authorize="hasAuthority('USERS_VIEW')" th:href="@{/users}">Открыть →</a></article>
+    <article class="card"><span>Роли</span><strong th:text="${roleCount}">0</strong><a sec:authorize="hasAuthority('ROLES_VIEW')" th:href="@{/roles}">Настроить →</a></article>
+    <article class="card"><span>События аудита</span><strong th:text="${eventCount}">0</strong><a sec:authorize="hasAuthority('AUDIT_VIEW')" th:href="@{/audit}">Посмотреть →</a></article>
+</section>
+<section class="panel welcome"><div><p class="eyebrow">Пространство команды</p><h2>Люди. Роли. Порядок.</h2><p>Здесь администратор управляет сотрудниками, ролями и разрешениями. Все важные изменения попадают в журнал.</p></div><div class="shield">✓</div></section>
+</main></div></body></html>

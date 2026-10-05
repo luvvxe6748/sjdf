@@ -1,0 +1,6 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Аудит — PulseHub</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body><div class="layout"><aside th:replace="~{fragments :: sidebar}"></aside><main class="content"><header><div><p class="eyebrow">Безопасность</p><h1>История изменений</h1></div></header>
+<section class="panel table-wrap"><table><thead><tr><th>Время</th><th>Кто</th><th>Событие</th><th>Описание</th></tr></thead><tbody><tr th:each="event : ${events}"><td th:text="${#temporals.format(event.createdAt, 'dd.MM.yyyy HH:mm')}"></td><td th:text="${event.actor}"></td><td><span class="badge" th:text="${event.action}"></span></td><td th:text="${event.details}"></td></tr><tr th:if="${#lists.isEmpty(events)}"><td colspan="4">Событий пока нет</td></tr></tbody></table></section>
+</main></div></body></html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Пользователь — PulseHub</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body><div class="layout"><aside th:replace="~{fragments :: sidebar}"></aside><main class="content narrow">
+<header><div><p class="eyebrow">Сотрудники</p><h1 th:text="${userForm.id == null ? 'Новый пользователь' : 'Редактирование'}"></h1></div></header>
+<div th:if="${error}" class="alert error" th:text="${error}"></div>
+<form class="panel form-stack" th:action="@{/users/save}" th:object="${userForm}" method="post"><input type="hidden" th:field="*{id}">
+<label>Логин<input th:field="*{username}" th:readonly="*{id != null}" placeholder="ivanov"><small class="field-error" th:errors="*{username}"></small></label>
+<label>ФИО<input th:field="*{fullName}" placeholder="Иванов Иван"><small class="field-error" th:errors="*{fullName}"></small></label>
+<label>Пароль<input type="password" th:field="*{password}" th:placeholder="*{id == null ? 'Минимум 6 символов' : 'Оставьте пустым, чтобы не менять'}"><small class="field-error" th:errors="*{password}"></small></label>
+<label>Роль<select th:field="*{roleId}"><option value="">Выберите роль</option><option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name + ' — ' + role.description}"></option></select><small class="field-error" th:errors="*{roleId}"></small></label>
+<label th:if="*{id != null}" class="check"><input type="checkbox" th:field="*{enabled}"> Учётная запись активна</label>
+<div class="form-actions"><a class="button secondary" th:href="@{/users}">Отмена</a><button class="button primary" type="submit">Сохранить</button></div>
+</form></main></div></body></html>

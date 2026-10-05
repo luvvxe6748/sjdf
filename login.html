@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Вход — PulseHub</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body class="login-page">
+<section class="login-intro"><p class="eyebrow">КАДРО / КОМАНДА И ДОСТУП</p><h2>Всё начинается с людей.</h2><p>Сотрудники, роли и понятные правила работы — в одном месте.</p></section>
+<main class="login-card">
+    <div class="logo">К</div>
+    <h1>Добро пожаловать</h1>
+    <p>Войдите в пространство PulseHub</p>
+    <div th:if="${param.error}" class="alert error">Неверный логин или пароль</div>
+    <div th:if="${param.logout}" class="alert success">Вы вышли из системы</div>
+    <form th:action="@{/login}" method="post" class="form-stack">
+        <label>Логин<input name="username" autocomplete="username" required autofocus></label>
+        <label>Пароль<input type="password" name="password" autocomplete="current-password" required></label>
+        <button class="button primary" type="submit">Войти</button>
+    </form>
+    <small>Демо: hubadmin / hub2026</small>
+</main>
+</body>
+</html>
